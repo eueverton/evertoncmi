@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Everton Comunicação Criativa - Conteúdos que unem criatividade e resultado</title>
+  <meta name="description" content="Transformamos sua presença digital com estratégia, criatividade e profissionalismo. Gestão de redes sociais, audiovisual criativo e tráfego pago.">
+  <meta name="keywords" content="marketing digital, gestão de redes sociais, audiovisual, tráfego pago, posicionamento digital">
+  <meta name="author" content="Everton Comunicação Criativa">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://evertoncomunicacao.com/">
+  <meta property="og:title" content="Everton Comunicação Criativa - Conteúdos que unem criatividade e resultado">
+  <meta property="og:description" content="Transformamos sua presença digital com estratégia, criatividade e profissionalismo.">
+  <meta property="og:image" content="https://evertoncomunicacao.com/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://evertoncomunicacao.com/">
+  <meta property="twitter:title" content="Everton Comunicação Criativa - Conteúdos que unem criatividade e resultado">
+  <meta property="twitter:description" content="Transformamos sua presença digital com estratégia, criatividade e profissionalismo.">
+  <meta property="twitter:image" content="https://evertoncomunicacao.com/og-image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Sistema de Configuração -->
+  <script src="config.js"></script>
+  <script>
+    // Funções para aplicar configuração dinâmica
+    function applyColors() {
+      if (window.CONFIG && window.CONFIG.colors) {
+        const root = document.documentElement;
+        root.style.setProperty('--primary-color', window.CONFIG.colors.primary);
+        root.style.setProperty('--primary-dark', window.CONFIG.colors.primaryDark);
+        root.style.setProperty('--secondary-color', window.CONFIG.colors.secondary);
+        root.style.setProperty('--accent-color', window.CONFIG.colors.accent);
+      }
+    }
+
+    function applyImages() {
+      if (window.CONFIG && window.CONFIG.images) {
+        // Aplicar logo
+        const logo = document.querySelector('.logo');
+        if (logo && window.CONFIG.images.logo) {
+          logo.innerHTML = `<img src="${window.CONFIG.images.logo}" alt="Logo" style="max-height: 40px;">`;
+        }
+
+        // Aplicar vídeo do hero
+        const heroVideo = document.getElementById('hero-video');
+        if (heroVideo && window.CONFIG.images.heroVideo) {
+          heroVideo.src = window.CONFIG.images.heroVideo;
+        }
+
+        // Aplicar background do hero
+        const hero = document.querySelector('.hero');
+        if (hero && window.CONFIG.images.heroBackground) {
+          hero.style.backgroundImage = `url(${window.CONFIG.images.heroBackground})`;
+        }
+
+        // Aplicar favicon
+        if (window.CONFIG.images.favicon) {
+          const favicon = document.querySelector('link[rel="icon"]');
+          if (favicon) {
+            favicon.href = window.CONFIG.images.favicon;
+          }
+        }
+      }
+    }
+
+    function applyTexts() {
+      if (window.CONFIG && window.CONFIG.texts) {
+        // Aplicar título da empresa
+        const companyName = document.querySelector('.logo');
+        if (companyName && window.CONFIG.texts.companyName) {
+          companyName.textContent = window.CONFIG.texts.companyName;
+        }
+
+        // Aplicar título do hero
+        const heroTitle = document.querySelector('.hero h1');
+        if (heroTitle && window.CONFIG.texts.heroTitle) {
+          heroTitle.textContent = window.CONFIG.texts.heroTitle;
+        }
+
+        // Aplicar subtítulo do hero
+        const heroSubtitle = document.querySelector('.hero p');
+        if (heroSubtitle && window.CONFIG.texts.heroSubtitle) {
+          heroSubtitle.textContent = window.CONFIG.texts.heroSubtitle;
+        }
+
+        // Aplicar texto dos botões CTA
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach(button => {
+          if (window.CONFIG.texts.ctaButton) {
+            button.textContent = window.CONFIG.texts.ctaButton;
+          }
+        });
+      }
+    }
+
+    function applyContact() {
+      if (window.CONFIG && window.CONFIG.contact) {
+        // Aplicar números de WhatsApp
+        const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+        whatsappLinks.forEach(link => {
+          if (link.href.includes('98984992661')) {
+            link.href = `https://wa.me/${window.CONFIG.contact.whatsapp1}`;
+          } else if (link.href.includes('98985554326')) {
+            link.href = `https://wa.me/${window.CONFIG.contact.whatsapp2}`;
+          }
+        });
+
+        // Aplicar email
+        const emailLinks = document.querySelectorAll('a[href*="mailto"]');
+        emailLinks.forEach(link => {
+          if (window.CONFIG.contact.email) {
+            link.href = `mailto:${window.CONFIG.contact.email}`;
+          }
+        });
+      }
+    }
+
+    function applyConfig() {
+      applyColors();
+      applyImages();
+      applyTexts();
+      applyContact();
+    }
+
+    // Aplicar configuração quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      // Aguardar um pouco para garantir que o CONFIG foi carregado
+      setTimeout(applyConfig, 100);
+    });
+
+    // Função para recarregar configuração (útil para testes)
+    window.reloadConfig = function() {
+      // Recarregar o script de configuração
+      const script = document.querySelector('script[src="config.js"]');
+      if (script) {
+        script.remove();
+        const newScript = document.createElement('script');
+        newScript.src = 'config.js';
+        newScript.onload = applyConfig;
+        document.head.appendChild(newScript);
+      }
+    };
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #E6E3DC;
+      --primary-dark: #1D1D1D;
+      --secondary-color: #DFD3C7;
+      --accent-color: #8C5737;
+      --text-dark: #1D1D1D;
+      --text-light: #666;
+      --text-white: #fff;
+      --bg-light: #f8f9fa;
+      --bg-dark: #1D1D1D;
+      --border-color: #e9ecef;
+      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+      --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      --gradient-dark: linear-gradient(135deg, var(--bg-dark) 0%, #2a2a2a 100%);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      background: var(--primary-dark);
+      color: var(--text-white);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .logo:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Desktop Navigation */
+    nav.desktop {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav.desktop a {
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav.desktop a:hover {
+      color: var(--primary-color);
+    }
+
+    nav.desktop a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    nav.desktop a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10001;
+      padding: 0.5rem;
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--primary-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5rem 2rem 2rem;
+      gap: 1.5rem;
+      transition: right 0.3s ease-in-out;
+      z-index: 10000;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+    }
+
+    .mobile-nav.open {
+      right: 0;
+    }
+
+    .mobile-nav a {
+      color: var(--text-white);
+      font-size: 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      transition: var(--transition);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--primary-color);
+      padding-left: 1rem;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Overlay for mobile menu */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--primary-dark);
+      color: var(--text-white);
+      padding: 120px 2rem 80px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      margin-bottom: 3rem;
+      color: var(--secondary-color);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      background: var(--accent-color);
+      color: var(--text-white);
+      padding: 1.2rem 2.5rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      background: #7a4a2f;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #25d366;
+      color: var(--text-white);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+      50% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.8); }
+      100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+    }
+
+    /* Config Button - REMOVIDO POR SEGURANÇA */
+    /* O painel de configuração será acessado via URL direta ou método alternativo */
+
+    /* Sections */
+    .section {
+      padding: 100px 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      scroll-margin-top: 100px;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3rem;
+      color: var(--text-dark);
+      font-weight: 700;
+      position: relative;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    /* Storytelling Section */
+    .storytelling {
+      background: var(--primary-color);
+      padding: 100px 2rem;
+    }
+
+    .storytelling-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .storytelling-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+    }
+
+    .storytelling-image {
+      background: var(--secondary-color);
+      height: 400px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+
+    /* Dores x Soluções */
+    .dores-solucoes {
+      background: var(--text-white);
+    }
+
+    .dores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .dor-card {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--accent-color);
+      transition: var(--transition);
+    }
+
+    .dor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .dor-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .dor-card h3 {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .dor-card p {
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .solucao {
+      background: var(--primary-color);
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      color: var(--accent-color);
+    }
+
+    /* Nossas Soluções */
+    .solucoes {
+      background: var(--secondary-color);
+    }
+
+    .solucoes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .solucao-card {
+      background: var(--text-white);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .solucao-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .solucao-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .solucao-card h3 {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .solucao-card ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .solucao-card li {
+      padding: 0.5rem 0;
+      color: var(--text-light);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .solucao-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    /* Prova Social */
+    .prova-social {
+      background: var(--text-white);
+    }
+
+    .prova-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .depoimento-card {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .depoimento-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .depoimento-video {
+      background: var(--primary-color);
+      height: 200px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 3rem;
+      color: var(--accent-color);
+    }
+
+    .depoimento-texto {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .depoimento-autor {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Portfólio */
+    .portfolio {
+      background: var(--primary-color);
+    }
+
+    .portfolio-content {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .portfolio-carrossel {
+      background: var(--text-white);
+      height: 300px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+
+    .case-sucesso {
+      background: var(--accent-color);
+      color: var(--text-white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      margin-top: 2rem;
+    }
+
+    /* Contratação Direta */
+    .contratacao {
+      background: var(--text-white);
+    }
+
+    .contratacao-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contrato-card {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .contrato-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-color);
+    }
+
+    .contrato-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .contrato-card h3 {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .contrato-card p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .contrato-btn {
+      background: var(--accent-color);
+      color: var(--text-white);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .contrato-btn:hover {
+      background: #7a4a2f;
+      transform: translateY(-2px);
+    }
+
+    /* FAQ */
+    .faq {
+      background: var(--secondary-color);
+    }
+
+    .faq-grid {
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+
+    .faq-item {
+      background: var(--text-white);
+      margin-bottom: 1rem;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .faq-question {
+      background: var(--primary-color);
+      padding: 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .faq-question:hover {
+      background: var(--accent-color);
+      color: var(--text-white);
+    }
+
+    .faq-answer {
+      padding: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-answer.active {
+      display: block;
+    }
+
+    /* Encerramento */
+    .encerramento {
+      background: var(--primary-dark);
+      color: var(--text-white);
+      text-align: center;
+      padding: 100px 2rem;
+    }
+
+    .encerramento h2 {
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+    }
+
+    .encerramento p {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .selo-credibilidade {
+      background: var(--accent-color);
+      color: var(--text-white);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-top: 2rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-dark);
+      color: var(--text-white);
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-section h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-section p {
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      color: var(--text-white);
+      font-size: 1.5rem;
+      transition: var(--transition);
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      nav.desktop {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 100px 1rem 60px;
+      }
+
+      .storytelling-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .storytelling-image {
+        height: 250px;
+      }
+
+      .section {
+        padding: 80px 1rem;
+      }
+
+      .dores-grid,
+      .solucoes-grid,
+      .prova-grid,
+      .contratacao-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dor-card,
+      .solucao-card,
+      .depoimento-card,
+      .contrato-card {
+        padding: 1.5rem;
+      }
+
+      .whatsapp-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .section h2 {
+        font-size: 1.8rem;
+      }
+
+      .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* Loading animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--text-white);
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      transform: translateY(-50px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--accent-color);
+    }
+
+    .modal h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+      font-size: 1.8rem;
+    }
+
+    .modal-options {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .modal-option {
+      background: var(--bg-light);
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .modal-option:hover {
+      border-color: var(--accent-color);
+      background: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .modal-option-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .modal-option h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .modal-option p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Form Modal */
+    .form-modal {
+      display: none;
+    }
+
+    .form-modal.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(140, 87, 55, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-back {
+      background: var(--text-light);
+      color: var(--text-white);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-back:hover {
+      background: #555;
+    }
+
+    .btn-submit {
+      background: var(--accent-color);
+      color: var(--text-white);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: #7a4a2f;
+    }
+
+    /* WhatsApp Modal */
+    .whatsapp-modal {
+      display: none;
+    }
+
+    .whatsapp-modal.active {
+      display: block;
+    }
+
+    .whatsapp-options {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .whatsapp-option {
+      background: #25d366;
+      color: var(--text-white);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-weight: 600;
+    }
+
+    .whatsapp-option:hover {
+      background: #20ba5a;
+      transform: translateY(-2px);
+    }
+
+    .whatsapp-option-icon {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .modal {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .form-buttons {
+        flex-direction: column;
+      }
+
+      .whatsapp-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Config Button - REMOVIDO POR SEGURANÇA -->
+  <!-- O painel de configuração será acessado via URL direta ou método alternativo -->
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/5598984992661?text=Olá! Gostaria de saber mais sobre os serviços da Everton Comunicação Criativa." 
+     class="whatsapp-btn" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     title="Fale conosco no WhatsApp">
+    📱
+  </a>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      
+      <!-- Main Modal Content -->
+      <div id="mainModal">
+        <h2>Como você prefere entrar em contato?</h2>
+        <div class="modal-options">
+          <div class="modal-option" id="formOption">
+            <span class="modal-option-icon">📧</span>
+            <h3>Enviar por Email</h3>
+            <p>Preencha um formulário e receba nossa resposta por email</p>
+          </div>
+          <div class="modal-option" id="whatsappOption">
+            <span class="modal-option-icon">📱</span>
+            <h3>Falar no WhatsApp</h3>
+            <p>Escolha um de nossos números para conversar diretamente</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Modal -->
+      <div id="formModal" class="form-modal">
+        <h2>Envie sua mensagem</h2>
+        <form id="contactForm" action="https://formsubmit.co/seuemail@email.com" method="POST">
+          <div class="form-group">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone">
+          </div>
+          
+          <div class="form-group">
+            <label for="servico">Serviço de interesse</label>
+            <select id="servico" name="servico">
+              <option value="">Selecione um serviço</option>
+              <option value="gestao-redes">Gestão de Redes Sociais</option>
+              <option value="audiovisual">Audiovisual Criativo</option>
+              <option value="trafego-pago">Tráfego Pago</option>
+              <option value="pacote-completo">Pacote Completo</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="mensagem">Como podemos te ajudar? *</label>
+            <textarea id="mensagem" name="mensagem" required placeholder="Conte-nos sobre seu projeto, objetivos e orçamento..."></textarea>
+          </div>
+          
+          <div class="form-buttons">
+            <button type="button" class="btn-back" id="formBack">Voltar</button>
+            <button type="submit" class="btn-submit">Enviar mensagem</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- WhatsApp Modal -->
+      <div id="whatsappModal" class="whatsapp-modal">
+        <h2>Escolha um número para conversar</h2>
+        <div class="whatsapp-options">
+          <a href="https://wa.me/5598984992661?text=Olá! Gostaria de saber mais sobre os serviços da Everton Comunicação Criativa. Quero tudo isso agora!" 
+             class="whatsapp-option" target="_blank">
+            <span class="whatsapp-option-icon">📱</span>
+            <span>WhatsApp 1 - (98) 98499-2661</span>
+          </a>
+          <a href="https://wa.me/5598985554326?text=Olá! Gostaria de saber mais sobre os serviços da Everton Comunicação Criativa. Quero tudo isso agora!" 
+             class="whatsapp-option" target="_blank">
+            <span class="whatsapp-option-icon">📱</span>
+            <span>WhatsApp 2 - (98) 98555-4326</span>
+          </a>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <button type="button" class="btn-back" id="whatsappBack">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">Everton Comunicação Criativa</a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="desktop">
+        <a href="#quem-somos">Quem Somos</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileMenu">
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#solucoes">Soluções</a>
+    <a href="#portfolio">Portfólio</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop>
+      <source src="video-bastidores.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Conteúdos que unem criatividade e resultado do seu jeito (com um toque nosso), para o seu público.</h1>
+      <a href="#" class="cta-button" id="mainCTA">👉 Quero tudo isso agora</a>
+    </div>
+  </section>
+
+  <!-- Storytelling - Quem Somos -->
+  <section id="quem-somos" class="section storytelling">
+    <h2>De conteúdos sem vida para um posicionamento que gera autoridade e resultados</h2>
+    <div class="storytelling-content">
+      <div class="storytelling-text">
+        <p>Nós sabemos como é frustrante investir tempo e dinheiro em conteúdos que não trazem retorno. Foi por isso que criamos a Everton Comunicação Criativa: para mostrar que é possível unir estratégia, criatividade e profissionalismo em cada detalhe.</p>
+        <p>Hoje, ajudamos médicos, clínicas de saúde, dentistas, nutricionistas, advogados, terapeutas e outros profissionais a se tornarem referências de verdade no digital.</p>
+      </div>
+      <div class="storytelling-image">
+        📹 Equipe em Gravação
+      </div>
+    </div>
+  </section>
+
+  <!-- Dores x Soluções -->
+  <section class="section dores-solucoes">
+    <h2>Se você passa por isso, a solução está aqui</h2>
+    <div class="dores-grid">
+      <div class="dor-card">
+        <span class="dor-icon">📱</span>
+        <h3>Sente que seu Instagram não transmite autoridade?</h3>
+        <p>Seu perfil não está passando a confiança que você merece.</p>
+        <div class="solucao">Ajustamos seu perfil e criamos conteúdos que passam confiança e profissionalismo.</div>
+      </div>
+      
+      <div class="dor-card">
+        <span class="dor-icon">💰</span>
+        <h3>Já tentou anúncios e não teve retorno?</h3>
+        <p>Dinheiro gasto sem resultados concretos.</p>
+        <div class="solucao">Montamos campanhas inteligentes que atraem pessoas realmente interessadas.</div>
+      </div>
+      
+      <div class="dor-card">
+        <span class="dor-icon">⏰</span>
+        <h3>Não tem tempo ou equipe para produzir bons conteúdos?</h3>
+        <p>Falta de tempo para criar conteúdo de qualidade.</p>
+        <div class="solucao">Nossa equipe cuida de tudo: do roteiro ao vídeo final.</div>
+      </div>
+      
+      <div class="dor-card">
+        <span class="dor-icon">📈</span>
+        <h3>Vê concorrentes crescendo enquanto você patina?</h3>
+        <p>Concorrentes ganhando espaço no digital.</p>
+        <div class="solucao">Nós posicionamos sua marca para que você seja lembrado e escolhido.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossas Soluções -->
+  <section id="solucoes" class="section solucoes">
+    <h2>E é assim que vamos fazer o negócio funcionar</h2>
+    <div class="solucoes-grid">
+      <div class="solucao-card">
+        <span class="solucao-icon">📱</span>
+        <h3>Gestão de Redes Sociais</h3>
+        <ul>
+          <li>Perfil planejado e impactante</li>
+          <li>Postagens mensais (Reels, carrosséis, cards, fotos profissionais)</li>
+          <li>Encontros mensais para visualizar resultados e estratégias</li>
+        </ul>
+      </div>
+      
+      <div class="solucao-card">
+        <span class="solucao-icon">🎬</span>
+        <h3>Audiovisual Criativo</h3>
+        <ul>
+          <li>Roteiros exclusivos sob medida</li>
+          <li>Produção de vídeos institucionais, Reels criativos e fotos profissionais</li>
+          <li>Contratação pontual ou pacotes mensais</li>
+        </ul>
+      </div>
+      
+      <div class="solucao-card">
+        <span class="solucao-icon">🚀</span>
+        <h3>Tráfego Pago – O Acelerador de Crescimento</h3>
+        <ul>
+          <li>Criação e gestão de campanhas no Meta Ads</li>
+          <li>Estratégias personalizadas para atrair clientes qualificados</li>
+          <li>Análise prévia do negócio para garantir retorno real</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prova Social -->
+  <section class="section prova-social">
+    <h2>Eles confiaram. Eles cresceram. Agora é a sua vez.</h2>
+    <div class="prova-grid">
+      <div class="depoimento-card">
+        <div class="depoimento-video">🎥</div>
+        <p class="depoimento-texto">"Em apenas 3 meses, minha clínica aumentou 60% no número de agendamentos. A equipe da Everton é incrível!"</p>
+        <div class="depoimento-autor">— Dra. Maria Silva, Clínica X</div>
+      </div>
+      
+      <div class="depoimento-card">
+        <div class="depoimento-video">🎥</div>
+        <p class="depoimento-texto">"Finalmente senti que minha marca está sendo vista da forma certa! O posicionamento mudou tudo."</p>
+        <div class="depoimento-autor">— João Santos, Consultor</div>
+      </div>
+      
+      <div class="depoimento-card">
+        <div class="depoimento-texto">"Tive um aumento de 300% no engajamento depois que fechei com eles! A equipe é fera e os resultados superaram todas as expectativas."</p>
+        <div class="depoimento-autor">— Ana Costa, CEO</div>
+      </div>
+      
+      <div class="depoimento-card">
+        <div class="depoimento-texto">"A equipe é fera. Entregaram tudo antes do prazo e com muita qualidade. Meu faturamento aumentou 150% no primeiro mês!"</p>
+        <div class="depoimento-autor">— Carlos Oliveira, Empresário</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfólio -->
+  <section id="portfolio" class="section portfolio">
+    <h2>Resultados que você pode ver e sentir</h2>
+    <div class="portfolio-content">
+      <div class="portfolio-carrossel">
+        📱 Carrossel de Reels Produzidos
+      </div>
+      <div class="case-sucesso">
+        <h3>Mini case de sucesso</h3>
+        <p>Em apenas 3 meses, a Clínica X aumentou em 60% o número de agendamentos com nossa estratégia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contratação Direta -->
+  <section class="section contratacao">
+    <h2>Escolha o caminho certo para sua presença digital</h2>
+    <div class="contratacao-grid">
+      <div class="contrato-card">
+        <span class="contrato-icon">📱</span>
+        <h3>Gestão de Redes Sociais</h3>
+        <p>Transforme seu perfil em uma ferramenta de vendas e autoridade.</p>
+        <a href="https://wa.me/5598984992661?text=Olá! Quero saber mais sobre Gestão de Redes Sociais." 
+           class="contrato-btn" target="_blank">
+          👉 Quero Gestão de Redes Sociais
+        </a>
+      </div>
+      
+      <div class="contrato-card">
+        <span class="contrato-icon">🎬</span>
+        <h3>Audiovisual Criativo</h3>
+        <p>Conteúdo que conecta e converte seu público.</p>
+        <a href="https://wa.me/5598984992661?text=Olá! Quero saber mais sobre Audiovisual Criativo." 
+           class="contrato-btn" target="_blank">
+          👉 Quero Audiovisual Criativo
+        </a>
+      </div>
+      
+      <div class="contrato-card">
+        <span class="contrato-icon">🚀</span>
+        <h3>Tráfego Pago – Acelerador de Crescimento</h3>
+        <p>Antes de iniciar, fazemos uma análise rápida do seu negócio para garantir que a estratégia traga o retorno que você espera.</p>
+        <a href="https://wa.me/5598984992661?text=Olá! Quero saber mais sobre Tráfego Pago." 
+           class="contrato-btn" target="_blank">
+          👉 Quero Tráfego Pago
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq">
+    <h2>Respondendo suas principais dúvidas</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-question">Preciso ter muitos seguidores para começar?</div>
+        <div class="faq-answer">Não. Nosso foco é atrair seguidores certos, não apenas números.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Posso contratar só um dos serviços?</div>
+        <div class="faq-answer">Sim! Você pode escolher entre Gestão de Redes Sociais, Audiovisual ou Tráfego Pago — ou combinar soluções.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">O tráfego pago é para qualquer negócio?</div>
+        <div class="faq-answer">Ele é mais eficaz para quem já tem estrutura de atendimento pronta. Antes de iniciar, fazemos uma análise rápida para garantir o retorno.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Quanto tempo demora para ver resultados?</div>
+        <div class="faq-answer">Depende do segmento, mas nossos clientes costumam notar evolução já nos primeiros meses.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encerramento -->
+  <section class="section encerramento">
+    <h2>Profissionais como você já estão se destacando. E você, vai esperar?</h2>
+    <p>Cada dia que passa, seus concorrentes estão construindo autoridade e ganhando espaço no digital. Não adie mais. Essa é a sua hora de transformar sua presença online.</p>
+    <a href="#" class="cta-button" id="finalCTA">
+      👉 Quero tudo isso agora
+    </a>
+    <div class="selo-credibilidade">+ 5 anos transformando profissionais em referências</div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Everton Comunicação Criativa</h3>
+        <p>Especialistas em marketing digital e posicionamento de marca. Transformamos sua presença online em resultados reais.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Serviços</h3>
+        <p>• Gestão de Redes Sociais</p>
+        <p>• Audiovisual Criativo</p>
+        <p>• Tráfego Pago</p>
+        <p>• Posicionamento Digital</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p>📧 contato@evertoncomunicacao.com</p>
+        <p>📱 (98) 98499-2661</p>
+        <p>📍 São Luís, MA</p>
+        
+        <div class="social-links">
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="LinkedIn">💼</a>
+          <a href="https://wa.me/5598984992661" title="WhatsApp" target="_blank">📱</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Everton Comunicação Criativa. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function toggleMobileMenu(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const isOpen = mobileMenu.classList.contains('open');
+      
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    menuToggle.addEventListener('click', toggleMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // FAQ functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const isActive = answer.classList.contains('active');
+        
+        // Close all other answers
+        document.querySelectorAll('.faq-answer').forEach(ans => {
+          ans.classList.remove('active');
+        });
+        
+        // Toggle current answer
+        if (!isActive) {
+          answer.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = document.querySelector('header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.dor-card, .solucao-card, .depoimento-card, .contrato-card').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+
+    // Add scroll-based header styling
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(29, 29, 29, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      } else {
+        header.style.background = 'var(--primary-dark)';
+        header.style.backdropFilter = 'none';
+      }
+    });
+
+    // Handle window resize
+    function handleResize() {
+      if (window.innerWidth > 768) {
+        closeMobileMenu();
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    // Modal functionality
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const mainCTA = document.getElementById('mainCTA');
+    const finalCTA = document.getElementById('finalCTA');
+    const formOption = document.getElementById('formOption');
+    const whatsappOption = document.getElementById('whatsappOption');
+    const mainModal = document.getElementById('mainModal');
+    const formModal = document.getElementById('formModal');
+    const whatsappModal = document.getElementById('whatsappModal');
+    const formBack = document.getElementById('formBack');
+    const whatsappBack = document.getElementById('whatsappBack');
+    const contactForm = document.getElementById('contactForm');
+
+    // Open modal
+    function openModal() {
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      showMainModal();
+    }
+
+    // Close modal
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      showMainModal();
+    }
+
+    // Show main modal
+    function showMainModal() {
+      mainModal.style.display = 'block';
+      formModal.classList.remove('active');
+      whatsappModal.classList.remove('active');
+    }
+
+    // Show form modal
+    function showFormModal() {
+      mainModal.style.display = 'none';
+      formModal.classList.add('active');
+      whatsappModal.classList.remove('active');
+    }
+
+    // Show WhatsApp modal
+    function showWhatsAppModal() {
+      mainModal.style.display = 'none';
+      formModal.classList.remove('active');
+      whatsappModal.classList.add('active');
+    }
+
+    // Event listeners
+    mainCTA.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    finalCTA.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    formOption.addEventListener('click', showFormModal);
+    whatsappOption.addEventListener('click', showWhatsAppModal);
+    formBack.addEventListener('click', showMainModal);
+    whatsappBack.addEventListener('click', showMainModal);
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Form submission
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = this.querySelector('.btn-submit');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.disabled = true;
+
+      // Simulate form submission (replace with actual form handling)
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        closeModal();
+      }, 2000);
+    });
+
+    // Atalho secreto para painel de configuração (Ctrl + Alt + C)
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.altKey && e.key === 'C') {
+        e.preventDefault();
+        window.open('painel-configuracao.html', '_blank');
+      }
+    });
+
+    // Função para aplicar todas as configurações
+    function applyConfig() {
+      applyColors();
+      applyImages();
+      applyTexts();
+      applyContact();
+    }
+
+    // Função para recarregar configurações
+    window.reloadConfig = function() {
+      const savedConfig = localStorage.getItem('landingPageConfig');
+      if (savedConfig) {
+        try {
+          const config = JSON.parse(savedConfig);
+          window.CONFIG = { ...window.CONFIG, ...config };
+          applyConfig();
+        } catch (e) {
+          console.error('Erro ao carregar configuração:', e);
+        }
+      }
+    };
+
+    // Aplicar configurações quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(applyConfig, 100);
+      setTimeout(window.reloadConfig, 200);
+    });
+  </script>
+
+</body>
+</html>
