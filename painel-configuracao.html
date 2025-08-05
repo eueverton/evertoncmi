@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Configuração - Everton Comunicação</title>
+  
+  <script>
+    // Proteção básica de acesso
+    // Verificar se veio da landing page ou se é acesso direto
+    const referrer = document.referrer;
+    const currentDomain = window.location.hostname;
+    
+    // Permitir acesso se veio da mesma página ou se é localhost (desenvolvimento)
+    if (referrer && !referrer.includes(currentDomain) && currentDomain !== 'localhost' && currentDomain !== '127.0.0.1') {
+      alert('Acesso não autorizado. Use o atalho Ctrl + Alt + C na landing page.');
+      window.location.href = '/';
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .config-panel {
+      max-width: 1200px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .config-header {
+      background: linear-gradient(135deg, #E6E3DC 0%, #DFD3C7 100%);
+      padding: 2rem;
+      text-align: center;
+      color: #1D1D1D;
+    }
+
+    .config-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .config-header p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .config-content {
+      padding: 2rem;
+    }
+
+    .config-section {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 2rem;
+    }
+
+    .config-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #8C5737;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '🎨';
+      font-size: 1.2rem;
+    }
+
+    .colors-section .section-title::before {
+      content: '🎨';
+    }
+
+    .images-section .section-title::before {
+      content: '📷';
+    }
+
+    .texts-section .section-title::before {
+      content: '📝';
+    }
+
+    .contact-section .section-title::before {
+      content: '📞';
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .config-item {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .config-item:hover {
+      border-color: #8C5737;
+      transform: translateY(-2px);
+    }
+
+    .config-item label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1D1D1D;
+    }
+
+    .config-item input,
+    .config-item textarea,
+    .config-item select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .config-item input:focus,
+    .config-item textarea:focus,
+    .config-item select:focus {
+      outline: none;
+      border-color: #8C5737;
+      box-shadow: 0 0 0 3px rgba(140, 87, 55, 0.1);
+    }
+
+    .color-preview {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      border: 2px solid #e9ecef;
+      margin-top: 0.5rem;
+      cursor: pointer;
+    }
+
+    .color-input-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .color-input-group input {
+      flex: 1;
+    }
+
+    .config-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #eee;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: #8C5737;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #7a4a2e;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #E6E3DC;
+      color: #1D1D1D;
+    }
+
+    .btn-secondary:hover {
+      background: #DFD3C7;
+      transform: translateY(-2px);
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #218838;
+      transform: translateY(-2px);
+    }
+
+    .preview-section {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .preview-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #8C5737;
+    }
+
+    .preview-content {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #e9ecef;
+    }
+
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-upload input[type=file] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-upload-label {
+      display: block;
+      padding: 1rem;
+      border: 2px dashed #8C5737;
+      border-radius: 6px;
+      text-align: center;
+      color: #8C5737;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-label:hover {
+      background: rgba(140, 87, 55, 0.1);
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    @media (max-width: 768px) {
+      .config-panel {
+        margin: 1rem;
+      }
+      
+      .config-content {
+        padding: 1rem;
+      }
+      
+      .config-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .config-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="config-panel">
+    <div class="config-header">
+      <h1>🎛️ Painel de Configuração</h1>
+      <p>Configure cores, imagens e textos da sua landing page de forma fácil</p>
+    </div>
+
+    <div class="config-content">
+      <!-- Seção de Cores -->
+      <div class="config-section colors-section">
+        <h2 class="section-title">Cores da Landing Page</h2>
+        
+        <div class="config-grid">
+          <div class="config-item">
+            <label for="primary-color">Cor Principal (Bege Claro)</label>
+            <div class="color-input-group">
+              <input type="color" id="primary-color" value="#E6E3DC">
+              <input type="text" id="primary-color-text" value="#E6E3DC" placeholder="#E6E3DC">
+            </div>
+            <div class="color-preview" id="primary-preview" style="background: #E6E3DC;"></div>
+          </div>
+
+          <div class="config-item">
+            <label for="primary-dark">Cor Escura (Preto)</label>
+            <div class="color-input-group">
+              <input type="color" id="primary-dark" value="#1D1D1D">
+              <input type="text" id="primary-dark-text" value="#1D1D1D" placeholder="#1D1D1D">
+            </div>
+            <div class="color-preview" id="primary-dark-preview" style="background: #1D1D1D;"></div>
+          </div>
+
+          <div class="config-item">
+            <label for="secondary-color">Cor Secundária (Bege Médio)</label>
+            <div class="color-input-group">
+              <input type="color" id="secondary-color" value="#DFD3C7">
+              <input type="text" id="secondary-color-text" value="#DFD3C7" placeholder="#DFD3C7">
+            </div>
+            <div class="color-preview" id="secondary-preview" style="background: #DFD3C7;"></div>
+          </div>
+
+          <div class="config-item">
+            <label for="accent-color">Cor de Destaque (Marrom)</label>
+            <div class="color-input-group">
+              <input type="color" id="accent-color" value="#8C5737">
+              <input type="text" id="accent-color-text" value="#8C5737" placeholder="#8C5737">
+            </div>
+            <div class="color-preview" id="accent-preview" style="background: #8C5737;"></div>
+          </div>
+        </div>
+
+        <div class="preview-section">
+          <div class="preview-title">🎨 Preview das Cores</div>
+          <div class="preview-content">
+            <div style="background: var(--primary-color); padding: 1rem; margin-bottom: 0.5rem; border-radius: 4px;">
+              <strong>Cor Principal:</strong> Fundo dos elementos principais
+            </div>
+            <div style="background: var(--secondary-color); padding: 1rem; margin-bottom: 0.5rem; border-radius: 4px;">
+              <strong>Cor Secundária:</strong> Fundo das seções alternadas
+            </div>
+            <div style="background: var(--accent-color); color: white; padding: 1rem; margin-bottom: 0.5rem; border-radius: 4px;">
+              <strong>Cor de Destaque:</strong> Botões e elementos de ação
+            </div>
+            <div style="background: var(--primary-dark); color: white; padding: 1rem; border-radius: 4px;">
+              <strong>Cor Escura:</strong> Cabeçalho e textos escuros
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de Imagens -->
+      <div class="config-section images-section">
+        <h2 class="section-title">Imagens e Vídeos</h2>
+        
+        <div class="config-grid">
+          <div class="config-item">
+            <label for="logo">Logo da Empresa</label>
+            <div class="file-upload">
+              <input type="file" id="logo" accept="image/*">
+              <label for="logo" class="file-upload-label">
+                📁 Clique para selecionar o logo
+              </label>
+            </div>
+            <div class="preview-section">
+              <div class="preview-title">Logo Atual</div>
+              <div class="preview-content">
+                <img id="logo-preview" src="logo-everton.png" alt="Logo" style="max-height: 60px; max-width: 200px;">
+              </div>
+            </div>
+          </div>
+
+          <div class="config-item">
+            <label for="hero-video">Vídeo de Fundo (Hero)</label>
+            <div class="file-upload">
+              <input type="file" id="hero-video" accept="video/*">
+              <label for="hero-video" class="file-upload-label">
+                🎥 Clique para selecionar o vídeo
+              </label>
+            </div>
+            <div class="preview-section">
+              <div class="preview-title">Vídeo Atual</div>
+              <div class="preview-content">
+                <video id="video-preview" controls style="max-width: 100%; height: 150px;">
+                  <source src="video-bastidores.mp4" type="video/mp4">
+                  Seu navegador não suporta vídeos.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="config-item">
+            <label for="hero-background">Imagem de Fundo (Alternativa)</label>
+            <div class="file-upload">
+              <input type="file" id="hero-background" accept="image/*">
+              <label for="hero-background" class="file-upload-label">
+                🖼️ Clique para selecionar a imagem
+              </label>
+            </div>
+            <div class="preview-section">
+              <div class="preview-title">Imagem Atual</div>
+              <div class="preview-content">
+                <img id="background-preview" src="hero-background.jpg" alt="Background" style="max-width: 100%; height: 150px; object-fit: cover; border-radius: 4px;">
+              </div>
+            </div>
+          </div>
+
+          <div class="config-item">
+            <label for="favicon">Favicon (Ícone do Site)</label>
+            <div class="file-upload">
+              <input type="file" id="favicon" accept="image/*">
+              <label for="favicon" class="file-upload-label">
+                🔗 Clique para selecionar o favicon
+              </label>
+            </div>
+            <div class="preview-section">
+              <div class="preview-title">Favicon Atual</div>
+              <div class="preview-content">
+                <img id="favicon-preview" src="favicon.ico" alt="Favicon" style="width: 32px; height: 32px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de Textos -->
+      <div class="config-section texts-section">
+        <h2 class="section-title">Textos e Conteúdo</h2>
+        
+        <div class="config-grid">
+          <div class="config-item">
+            <label for="company-name">Nome da Empresa</label>
+            <input type="text" id="company-name" value="Everton Comunicação Criativa" placeholder="Nome da sua empresa">
+          </div>
+
+          <div class="config-item">
+            <label for="company-slogan">Slogan da Empresa</label>
+            <input type="text" id="company-slogan" value="Conteúdos que unem criatividade e resultado" placeholder="Slogan da sua empresa">
+          </div>
+
+          <div class="config-item">
+            <label for="hero-title">Título Principal (Hero)</label>
+            <input type="text" id="hero-title" value="Conteúdos que unem criatividade e resultado" placeholder="Título principal da página">
+          </div>
+
+          <div class="config-item">
+            <label for="hero-subtitle">Subtítulo Principal</label>
+            <input type="text" id="hero-subtitle" value="Transformamos sua presença digital com estratégia, criatividade e profissionalismo" placeholder="Subtítulo da página">
+          </div>
+
+          <div class="config-item">
+            <label for="cta-button">Texto do Botão CTA</label>
+            <input type="text" id="cta-button" value="Quero tudo isso agora" placeholder="Texto do botão principal">
+          </div>
+
+          <div class="config-item">
+            <label for="company-description">Descrição da Empresa</label>
+            <textarea id="company-description" rows="3" placeholder="Descrição completa da sua empresa">Transformamos sua presença digital com estratégia, criatividade e profissionalismo.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de Contato -->
+      <div class="config-section contact-section">
+        <h2 class="section-title">Informações de Contato</h2>
+        
+        <div class="config-grid">
+          <div class="config-item">
+            <label for="contact-email">Email de Contato</label>
+            <input type="email" id="contact-email" value="contato@evertoncomunicacao.com" placeholder="seu@email.com">
+          </div>
+
+          <div class="config-item">
+            <label for="whatsapp-1">WhatsApp 1</label>
+            <input type="tel" id="whatsapp-1" value="98984992661" placeholder="(98) 98499-2661">
+          </div>
+
+          <div class="config-item">
+            <label for="whatsapp-2">WhatsApp 2</label>
+            <input type="tel" id="whatsapp-2" value="98985554326" placeholder="(98) 98555-4326">
+          </div>
+
+          <div class="config-item">
+            <label for="instagram">Instagram</label>
+            <input type="url" id="instagram" value="https://instagram.com/evertoncomunicacao" placeholder="https://instagram.com/suaempresa">
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="config-buttons">
+        <button class="btn btn-secondary" onclick="previewChanges()">
+          👁️ Visualizar Mudanças
+        </button>
+        <button class="btn btn-primary" onclick="saveChanges()">
+          💾 Salvar Configuração
+        </button>
+        <button class="btn btn-success" onclick="downloadConfig()">
+          📥 Baixar Configuração
+        </button>
+        <a href="ESTRUTURA.HTML" class="btn btn-secondary" target="_blank">
+          🌐 Ver Landing Page
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Carregar configuração atual
+    let currentConfig = {
+      colors: {
+        primary: "#E6E3DC",
+        primaryDark: "#1D1D1D",
+        secondary: "#DFD3C7",
+        accent: "#8C5737"
+      },
+      images: {
+        logo: "logo-everton.png",
+        heroVideo: "video-bastidores.mp4",
+        heroBackground: "hero-background.jpg",
+        favicon: "favicon.ico"
+      },
+      texts: {
+        companyName: "Everton Comunicação Criativa",
+        companySlogan: "Conteúdos que unem criatividade e resultado",
+        heroTitle: "Conteúdos que unem criatividade e resultado",
+        heroSubtitle: "Transformamos sua presença digital com estratégia, criatividade e profissionalismo",
+        ctaButton: "Quero tudo isso agora",
+        companyDescription: "Transformamos sua presença digital com estratégia, criatividade e profissionalismo."
+      },
+      contact: {
+        email: "contato@evertoncomunicacao.com",
+        whatsapp1: "98984992661",
+        whatsapp2: "98985554326",
+        instagram: "https://instagram.com/evertoncomunicacao"
+      }
+    };
+
+    // Sincronizar inputs de cor
+    function syncColorInputs(colorId, textId, previewId) {
+      const colorInput = document.getElementById(colorId);
+      const textInput = document.getElementById(textId);
+      const preview = document.getElementById(previewId);
+
+      colorInput.addEventListener('input', function() {
+        textInput.value = this.value;
+        preview.style.background = this.value;
+        currentConfig.colors[colorId.replace('-color', '')] = this.value;
+      });
+
+      textInput.addEventListener('input', function() {
+        colorInput.value = this.value;
+        preview.style.background = this.value;
+        currentConfig.colors[colorId.replace('-color', '')] = this.value;
+      });
+    }
+
+    // Configurar uploads de arquivo
+    function setupFileUpload(fileId, previewId) {
+      const fileInput = document.getElementById(fileId);
+      const preview = document.getElementById(previewId);
+
+      fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            if (file.type.startsWith('image/')) {
+              preview.src = e.target.result;
+            } else if (file.type.startsWith('video/')) {
+              preview.src = e.target.result;
+            }
+            currentConfig.images[fileId] = file.name;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Sincronizar inputs de texto
+    function syncTextInputs() {
+      const textInputs = ['company-name', 'company-slogan', 'hero-title', 'hero-subtitle', 'cta-button', 'company-description'];
+      
+      textInputs.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.addEventListener('input', function() {
+            const key = inputId.replace('-', '');
+            currentConfig.texts[key] = this.value;
+          });
+        }
+      });
+
+      const contactInputs = ['contact-email', 'whatsapp-1', 'whatsapp-2', 'instagram'];
+      contactInputs.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.addEventListener('input', function() {
+            const key = inputId.replace('-', '');
+            currentConfig.contact[key] = this.value;
+          });
+        }
+      });
+    }
+
+    // Visualizar mudanças
+    function previewChanges() {
+      // Aplicar cores
+      const root = document.documentElement;
+      root.style.setProperty('--primary-color', currentConfig.colors.primary);
+      root.style.setProperty('--primary-dark', currentConfig.colors.primaryDark);
+      root.style.setProperty('--secondary-color', currentConfig.colors.secondary);
+      root.style.setProperty('--accent-color', currentConfig.colors.accent);
+
+      showAlert('Mudanças aplicadas! Recarregue a página para ver todas as alterações.', 'success');
+    }
+
+    // Salvar configuração
+    function saveChanges() {
+      const configData = JSON.stringify(currentConfig, null, 2);
+      localStorage.setItem('landingPageConfig', configData);
+      
+      // Criar arquivo de configuração
+      const configFile = `const CONFIG = ${configData};`;
+      const blob = new Blob([configFile], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'config.js';
+      a.click();
+      
+      // Tentar atualizar o arquivo config.js no servidor (se possível)
+      try {
+        // Se estiver em um ambiente que suporta File System Access API
+        if ('showSaveFilePicker' in window) {
+          showSaveFilePicker({
+            suggestedName: 'config.js',
+            types: [{
+              description: 'JavaScript Files',
+              accept: { 'application/javascript': ['.js'] }
+            }]
+          }).then(handle => {
+            const writable = handle.createWritable();
+            writable.write(configFile);
+            writable.close();
+          });
+        }
+      } catch (e) {
+        console.log('File System Access API não disponível, usando download padrão');
+      }
+      
+      showAlert('Configuração salva com sucesso! Arquivo config.js baixado. Recarregue a landing page para ver as mudanças.', 'success');
+    }
+
+    // Baixar configuração
+    function downloadConfig() {
+      const configData = JSON.stringify(currentConfig, null, 2);
+      const blob = new Blob([configData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'configuracao.json';
+      a.click();
+      
+      showAlert('Arquivo de configuração baixado!', 'success');
+    }
+
+    // Mostrar alerta
+    function showAlert(message, type) {
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      
+      const content = document.querySelector('.config-content');
+      content.insertBefore(alert, content.firstChild);
+      
+      setTimeout(() => {
+        alert.remove();
+      }, 5000);
+    }
+
+    // Inicializar campos com valores atuais
+    function initializeFields() {
+      // Inicializar cores
+      const colorFields = ['primary-color', 'primary-dark', 'secondary-color', 'accent-color'];
+      colorFields.forEach(field => {
+        const colorInput = document.getElementById(field);
+        const textInput = document.getElementById(field + '-text');
+        const preview = document.getElementById(field.replace('-color', '') + '-preview');
+        
+        if (colorInput && textInput && preview) {
+          const colorKey = field.replace('-color', '');
+          const colorValue = currentConfig.colors[colorKey];
+          
+          colorInput.value = colorValue;
+          textInput.value = colorValue;
+          preview.style.background = colorValue;
+        }
+      });
+
+      // Inicializar textos
+      const textFields = {
+        'company-name': 'companyName',
+        'company-slogan': 'companySlogan',
+        'hero-title': 'heroTitle',
+        'hero-subtitle': 'heroSubtitle',
+        'cta-button': 'ctaButton',
+        'company-description': 'companyDescription'
+      };
+
+      Object.keys(textFields).forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input) {
+          input.value = currentConfig.texts[textFields[fieldId]] || '';
+        }
+      });
+
+      // Inicializar contatos
+      const contactFields = {
+        'contact-email': 'email',
+        'whatsapp-1': 'whatsapp1',
+        'whatsapp-2': 'whatsapp2',
+        'instagram': 'instagram'
+      };
+
+      Object.keys(contactFields).forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (input) {
+          input.value = currentConfig.contact[contactFields[fieldId]] || '';
+        }
+      });
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function() {
+      // Carregar configuração salva primeiro
+      const savedConfig = localStorage.getItem('landingPageConfig');
+      if (savedConfig) {
+        try {
+          const parsedConfig = JSON.parse(savedConfig);
+          currentConfig = { ...currentConfig, ...parsedConfig };
+        } catch (e) {
+          console.error('Erro ao carregar configuração salva:', e);
+        }
+      }
+
+      // Inicializar campos com valores atuais
+      initializeFields();
+
+      // Sincronizar cores
+      syncColorInputs('primary-color', 'primary-color-text', 'primary-preview');
+      syncColorInputs('primary-dark', 'primary-dark-text', 'primary-dark-preview');
+      syncColorInputs('secondary-color', 'secondary-color-text', 'secondary-preview');
+      syncColorInputs('accent-color', 'accent-color-text', 'accent-preview');
+
+      // Configurar uploads
+      setupFileUpload('logo', 'logo-preview');
+      setupFileUpload('hero-video', 'video-preview');
+      setupFileUpload('hero-background', 'background-preview');
+      setupFileUpload('favicon', 'favicon-preview');
+
+      // Sincronizar textos
+      syncTextInputs();
+
+      console.log('Painel de configuração inicializado com:', currentConfig);
+    });
+  </script>
+</body>
+</html> 
